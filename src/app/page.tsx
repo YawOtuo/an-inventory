@@ -1,20 +1,22 @@
-"use client"
+"use client";
 import { useQuery } from "@tanstack/react-query";
-import { fetchInventories } from "../../lib/api/inventory";
 import { CautionCard } from "./components/cautionCard";
+import { fetchItems } from "../../lib/api/items";
 
 const Page = () => {
   const {
     isLoading,
     error,
-    data: inventories,
-  } = useQuery(["inventory"], () => fetchInventories());
+    data: items,
+  } = useQuery(["inventory"], () => fetchItems());
 
   return (
-    <div>
-      {inventories?.map((r: any, index: any) => (
-        <CautionCard key={index} type={r?.type} count={r?.number} />
-      ))}
+    <div className="p-10 ">
+      <div className="flex flex-wrap gap-2">
+        {items?.map((r: any, index: any) => (
+          <CautionCard key={index} type={r?.type} count={r?.quantity} />
+        ))}
+      </div>
     </div>
   );
 };
