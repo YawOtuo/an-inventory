@@ -20,7 +20,7 @@ const Page = () => {
   } = useQuery(["inventory"], () => fetchItems());
 
   return (
-    <div className="w-full flex flex-col justify-center items-center">
+    <div className="w-full flex flex-col justify-center items-center px-10 py-5">
       <div className="w-full ">
         <p>Cautions</p>
         <LowStockItems />
