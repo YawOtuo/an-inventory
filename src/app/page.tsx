@@ -19,11 +19,11 @@ const Page = () => {
   } = useQuery(["inventory"], () => fetchItems());
 
   return (
-    <Root className="grid grid-cols-5 gap-10 px-5">
-      <div className="hidden lg:col-span-1">
+    <Root className="grid grid-cols-5 gap-10 ">
+      <div className="lg:col-span-1">
         <SideNav />
       </div>
-      <div className="col-span-5 lg:col-span-4 pt-5">
+      <div className="col-span-5 lg:col-span-4 pt-5 px-5 lg:px-0">
         <p>Cautions</p>
         <div className="">
           <Swiper
