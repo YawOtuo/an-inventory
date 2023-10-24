@@ -1,9 +1,12 @@
 import "./globals.css";
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Montserrat } from "next/font/google";
 import Providers from "../../lib/utils/provider";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/grid";
 
-const inter = Inter({ subsets: ["latin"] });
+const montserrat = Montserrat({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -18,7 +21,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <Providers>
-        <body className={inter.className}>{children}</body>
+        <body className={`${montserrat.className}  flex justify-center items-center`}>
+          <div className="flex justify-center items-center max-w-[1728px]">{children}</div>
+        </body>
       </Providers>
     </html>
   );
