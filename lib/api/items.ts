@@ -7,14 +7,14 @@ export const fetchItems = async () => {
 
 
 
-export const AddInventory = async (body) => {
-
-  const response = await fetch(`${url}inventories`, {
+export const AddItems = async (body) => {
+  
+  const response = await fetch(`${url}items`, {
     method: "POST",
     body: JSON.stringify(body),
-    headers: {
-      "Content-Type": "application/json", // Set the content type to JSON
-    },
+    mode: "cors",
+    headers: new Headers({'content-type': 'application/json'}),
+
   });
   return response.json();
 };

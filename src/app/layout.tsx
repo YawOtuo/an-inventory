@@ -5,6 +5,7 @@ import Providers from "../../lib/utils/provider";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/grid";
+import Navbar from "./components/navbar";
 
 const montserrat = Montserrat({ subsets: ["latin"] });
 
@@ -21,8 +22,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <Providers>
-        <body className={`${montserrat.className}  flex justify-center items-center`}>
-          <div className="flex justify-center items-center max-w-[1728px]">{children}</div>
+        <body
+          className={`${montserrat.className}  flex flex-col justify-center items-center`}>
+          <Navbar />
+
+          <div className="flex flex-col justify-center items-center max-w-[1728px] w-full">
+            {children}
+          </div>
         </body>
       </Providers>
     </html>
