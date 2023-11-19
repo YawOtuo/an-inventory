@@ -13,6 +13,9 @@ import LowStockItems from "./components/LowStockItems";
 import JustFilled from "./components/JustFilled";
 import { useState } from "react";
 import IconButton from "./components/Buttons/IconButton";
+import AddItem from "./components/modals/AddItem";
+import Refill from "./components/modals/Refill";
+import Sell from "./components/modals/sell";
 
 const Page = () => {
   const {
@@ -40,14 +43,13 @@ const Page = () => {
         )}
         <div className="flex flex-col gap-6">
           <div className="flex flex-col gap-1">
-            <p className="text-[40px]">Welcome Mrs. Anokye,</p>
-            <p>What would you like to do today</p>
+            <p className="text-[40px] font-bold">Welcome Mrs. Anokye,</p>
+            <p>What would you like to do today?</p>
           </div>
           <div className="flex gap-5 flex-col lg:flex-row items-start lg:items-center">
-            <IconButton variant={"add"} label={"Add Item"} />
-
-            <IconButton variant={"refill"} label={"Refill"} />
-            <IconButton variant={"sell"} label={"Sell"} />
+            <AddItem />
+            <Refill /> 
+            <Sell/>
             <IconButton
               reverse
               variant={"inventories"}

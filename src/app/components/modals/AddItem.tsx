@@ -14,7 +14,7 @@ type Props = {
   setOpen: any;
 };
 
-const DialogDemo = () => {
+const AddItem = () => {
   const queryClient = useQueryClient();
 
   const addItemMutation = useMutation(
@@ -150,7 +150,7 @@ const DialogDemo = () => {
   );
 };
 
-export default DialogDemo;
+export default AddItem;
 
 const FormDiv = styled("div", {
   display: "flex",
