@@ -68,3 +68,6 @@ export const CAccordionContent = React.forwardRef(
   )
 );
 
+CAccordionContent.displayName = "CAccordionContent"
+CAccordionItem.displayName = "CAccordionContent"
+CAccordionTrigger.displayName = "CAccordionContent"
