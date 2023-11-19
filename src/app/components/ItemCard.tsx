@@ -24,7 +24,7 @@ export default function ItemCard({ name, category, count }: Props) {
           <div className="bg-slate-100 px-5 py-1">{category}</div>{" "}
         </div>
 
-        <div>{count || 30}</div>
+        <div>{count || 0}</div>
       </div>{" "}
     </div>
   );

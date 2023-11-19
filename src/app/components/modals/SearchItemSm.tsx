@@ -19,8 +19,8 @@ const SearchItemSmModal = ({ item }: Props) => {
   return (
     <Dialog.Root>
       <Dialog.Trigger asChild className="w-full">
-        <div className="w-full">
-          <ItemCard name={item?.type} category="CLOTH" count={item?.count} />
+        <div className="w-full text-black">
+          <ItemCard name={item?.name} category="CLOTH" count={item?.quantity} />
         </div>
       </Dialog.Trigger>
       <Dialog.Portal>

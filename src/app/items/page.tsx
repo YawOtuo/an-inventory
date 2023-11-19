@@ -21,7 +21,7 @@ export default function Page() {
         {items?.map((r, index) => (
           <div className="col-span-2 md:col-span-2 lg:col-span-1" key={index}>
             <Link href={`/items/${r?.id}`}>
-              <ItemCard category="cloth" name={r?.type} count={r?.count} />
+              <ItemCard category={r?.category} name={r?.name} count={r?.count} />
             </Link>
           </div>
         ))}

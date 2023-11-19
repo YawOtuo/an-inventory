@@ -10,31 +10,20 @@ import { AddItems } from "../../../../lib/api/items";
 import IconButton from "../Buttons/IconButton";
 
 type Props = {
-  open: any;
-  setOpen: any;
+  id: number;
 };
 
-const Sell = () => {
+const Sell = ({ id=46 }: Props) => {
   const queryClient = useQueryClient();
 
-  const addItemMutation = useMutation(
-    async (body) => {
-      return await AddItems(body);
+  const mutation = useMutation((newItem) => AddInventory(newItem), {
+    onSuccess: () => {
+      queryClient.invalidateQueries(`inventory-${id}`);
     },
-    {
-      onSuccess: () => {
-        queryClient.invalidateQueries("Items");
-      },
-    }
-  );
+  });
 
-  // Usage within your component
-  const addItem = async (ItemData) => {
-    try {
-      const response = await addItemMutation.mutateAsync(ItemData);
-    } catch (error) {
-      console.error(error);
-    }
+  const handleSell = async (newItem) => {
+    mutation.mutate(newItem);
   };
 
   return (
@@ -53,13 +42,13 @@ const Sell = () => {
           <div className="flex flex-col gap-3 items-start lg:items-end">
             <Formik
               initialValues={{
-                type: "",
-                quantity: null,
-                price: "",
-                vairants: [],
+                action: "sell",
+                date: new Date().toLocaleDateString(),
+                quantity: 0,
+                itemId: id,
               }}
               onSubmit={(values) => {
-                addItem(values);
+                handleSell(values);
               }}>
               <Form className="flex flex-col items-start gap-5 w-full">
                 <div className="flex gap-5 flex-col w-full">
@@ -67,8 +56,22 @@ const Sell = () => {
                     <label htmlFor="date">Date</label>
                     <Field
                       type="text"
+                      name="date"
+                      placeholder="Enter date"
+                      className="form-input"
+                    />
+                    <ErrorMessage
                       name="type"
-                      placeholder="Enter type"
+                      component="div"
+                      className="error"
+                    />
+                  </FormDiv>
+                  <FormDiv>
+                    <label htmlFor="item">Item</label>
+                    <Field
+                      type="text"
+                      name="item"
+                      placeholder="Select item"
                       className="form-input"
                     />
                     <ErrorMessage
@@ -81,8 +84,8 @@ const Sell = () => {
                     <label htmlFor="date">Amount</label>
                     <Field
                       type="text"
-                      name="type"
-                      placeholder="Enter type"
+                      name="amount"
+                      placeholder="Enter amount"
                       className="form-input"
                     />
                     <ErrorMessage

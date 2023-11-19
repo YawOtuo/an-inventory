@@ -10,9 +10,11 @@ type Props = {
 export default function SearchOneDetails({ item }: Props) {
   return (
     <div>
-      <div className="col-span-4 lg:col-span-2 flex flex-col items-start px-10 justify-between order-1 lg:order-2">
+      <div className="col-span-4 lg:col-span-2 flex flex-col items-start px-10 justify-between order-1 lg:order-2 text-black">
         <div className="flex flex-col ">
-          <p className="text-3xl font-semibold capitalize">{item?.type}</p>
+          <p className="text-3xl font-semibold capitalize">{item?.name}</p>
+          
+          <p className="font-[400] capitalize">{item?.category}</p>
           <p>
             <span className="text-md">Quantity</span> :{item?.quantity}
           </p>

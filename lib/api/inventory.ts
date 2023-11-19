@@ -5,8 +5,6 @@ export const fetchInventories = async () => {
   return response.json();
 };
 
-
-
 export const AddInventory = async (body) => {
 
   const response = await fetch(`${url}inventories`, {

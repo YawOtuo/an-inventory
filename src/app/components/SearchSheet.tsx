@@ -82,9 +82,9 @@ export default function SearchSheet() {
                       className="col-span-4 md:col-span-2 lg:col-span-1 "
                       key={index}>
                       <ItemCard
-                        category="cloth"
-                        name={r?.type}
-                        count={r?.count}
+                        category={r?.category}
+                        name={r?.name}
+                        count={r?.quantity}
                       />
                     </div>
                   ))}

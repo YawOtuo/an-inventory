@@ -2,13 +2,15 @@ import { useQuery } from "@tanstack/react-query";
 import { fetchItems } from "../../../lib/api/items";
 import ItemCard from "./ItemCard";
 import { Swiper, SwiperSlide } from "swiper/react";
+import { fetchInventories } from "../../../lib/api/inventory";
+import Link from "next/link";
 
 export default function RecentlySold() {
   const {
     isLoading,
     error,
     data: items,
-  } = useQuery(["inventory"], () => fetchItems());
+  } = useQuery(["inventory"], () => fetchInventories());
   return (
     <div className="py-5 w-full">
       <p>Recently Sold</p>
@@ -16,7 +18,7 @@ export default function RecentlySold() {
         {items?.slice(0, 6).map((r: any, index: any) => (
           <div className="col-span-3 md:col-span-1" key={index}>
             {" "}
-            <ItemCard key={index} category="cloth" name={r?.type} count={r?.quantity} />
+          <Link href={'/inventory'}>  <ItemCard key={index} category={r?.Item?.category} name={r?.Item?.name} count={r?.quantity} /></Link>
           </div>
         ))}
       </div>

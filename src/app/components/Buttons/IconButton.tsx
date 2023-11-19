@@ -44,7 +44,7 @@ export default function IconButton({ variant, label, reverse }: Props) {
         reverse && "flex-row-reverse"
       } px-3 py-2`}>
       {options[variant]}
-      <p className="text-[15px]">{label}</p>
+      <p className="text-[15px] whitespace-nowrap">{label}</p>
     </button>
   );
 }

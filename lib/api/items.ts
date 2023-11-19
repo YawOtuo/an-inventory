@@ -27,6 +27,18 @@ export const AddItems = async (body) => {
   return response.json();
 };
 
+export const UpdateItem = async (body, id) => {
+  
+  const response = await fetch(`${url}items/${id}`, {
+    method: "PUT",
+    body: JSON.stringify(body),
+    mode: "cors",
+    headers: new Headers({'content-type': 'application/json'}),
+
+  });
+  return response.json();
+};
+
 
 export const SearchItem = async (query) => {
   const response = await fetch(`${url}items/search/search?keyword=${query}`);
