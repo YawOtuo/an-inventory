@@ -14,7 +14,7 @@ type Props = {
   setOpen: any;
 };
 
-const DialogDemo = () => {
+const Refill = () => {
   const queryClient = useQueryClient();
 
   const addItemMutation = useMutation(
@@ -41,14 +41,14 @@ const DialogDemo = () => {
     <Dialog.Root>
       <Dialog.Trigger asChild className="w-fit">
         <div className="w-fit">
-          <IconButton label="New Item" variant="add" />
+          <IconButton label="refill" variant="refill" />
         </div>
       </Dialog.Trigger>
       <Dialog.Portal>
         <Dialog.Overlay className="bg-blackA6 data-[state=open]:animate-overlayShow fixed inset-0 bg-[#00000028]" />
-        <Dialog.Content className="data-[state=open]:animate-contentShow fixed top-[50%] left-[50%] max-h-[85vh] w-[70vw]  translate-x-[-50%] translate-y-[-50%] rounded-[6px] bg-white p-[25px] shadow-[hsl(206_22%_7%_/_35%)_0px_10px_38px_-10px,_hsl(206_22%_7%_/_20%)_0px_10px_20px_-15px] focus:outline-none">
+        <Dialog.Content className="data-[state=open]:animate-contentShow fixed top-[50%] left-[50%] max-h-[85vh] w-fit max-w-[50vw]  translate-x-[-50%] translate-y-[-50%] rounded-[6px] bg-white p-[25px] shadow-[hsl(206_22%_7%_/_35%)_0px_10px_38px_-10px,_hsl(206_22%_7%_/_20%)_0px_10px_20px_-15px] focus:outline-none z-[2100]">
           <Dialog.Title className="text-mauve12 m-0 text-[17px] font-medium">
-            Add Item
+            Refill
           </Dialog.Title>
           <div className="flex flex-col gap-3 items-start lg:items-end">
             <Formik
@@ -61,10 +61,10 @@ const DialogDemo = () => {
               onSubmit={(values) => {
                 addItem(values);
               }}>
-              <Form className="grid grid-cols-2 items-start gap-5 w-full">
+              <Form className="flex flex-col items-start gap-5 w-full">
                 <div className="flex gap-5 flex-col">
                   <FormDiv>
-                    <label htmlFor="date">Type</label>
+                    <label htmlFor="date">Date</label>
                     <Field
                       type="text"
                       name="type"
@@ -78,7 +78,7 @@ const DialogDemo = () => {
                     />
                   </FormDiv>
                   <FormDiv>
-                    <label htmlFor="date">Category</label>
+                    <label htmlFor="date">Amount</label>
                     <Field
                       type="text"
                       name="type"
@@ -91,44 +91,11 @@ const DialogDemo = () => {
                       className="error"
                     />
                   </FormDiv>
-                </div>
-                <div className="flex gap-5 flex-col">
-                  <FormDiv>
-                    <label htmlFor="date">Quantity</label>
-                    <Field
-                      type="number"
-                      id="song"
-                      name="quantity"
-                      placeholder="Enter quanitity"
-                      className="form-input"
-                    />
-                    <ErrorMessage
-                      name="song"
-                      component="div"
-                      className="error"
-                    />
-                  </FormDiv>
-                  <FormDiv>
-                    <label htmlFor="date">Price</label>
-                    <Field
-                      type="number"
-                      id="song"
-                      name="price"
-                      placeholder="Enter price"
-                      className="form-input"
-                    />
-                    <ErrorMessage
-                      name="song"
-                      component="div"
-                      className="error"
-                    />
-                  </FormDiv>
-            
                 </div>
 
                 <button
                   type="submit"
-                  className="w-full col-span-2  max-h-[50px] bg-[#E4A951] p-2 font-semibold text-white"
+                  className="w-full   max-h-[50px] bg-[#E4A951] p-2 font-semibold text-white"
                   // aria-label="Close"
                 >
                   Add
@@ -150,7 +117,7 @@ const DialogDemo = () => {
   );
 };
 
-export default DialogDemo;
+export default Refill;
 
 const FormDiv = styled("div", {
   display: "flex",

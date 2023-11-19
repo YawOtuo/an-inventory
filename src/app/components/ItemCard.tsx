@@ -1,22 +1,31 @@
+import Image from "next/image";
 import { TbIroning2 } from "react-icons/tb";
 
 type Props = {
-  type: string;
+  name: string;
+  category: string;
   count: string | number;
 };
 
-export default function ItemCard({ type, count }: Props) {
+export default function ItemCard({ name, category, count }: Props) {
   return (
-    <div className="flex flex-col items-center justify-center py-10
+    <div
+      className="w-full py-3 px-5
     hover:bg-[#e4a9513e] cursor-pointer
-    " >
-      <TbIroning2 color="#E4A951" size="50" />
-      <div className="flex text-md capitalize">
-        {type}
-        <div>{count}</div>
+    ">
+      <div className="flex text-md capitalize justify-between items-center">
+        <div className="flex gap-7 justify-center items-center">
+          <div className="flex gap-5 items-center">
+            <div className="relative aspect-square w-[40px] ">
+              <Image src={"/testimage1.png"} fill alt="Image" />
+            </div>
+            {name}
+          </div>
+          <div className="bg-slate-100 px-5 py-1">{category}</div>{" "}
+        </div>
+
+        <div>{count || 30}</div>
       </div>{" "}
     </div>
   );
 }
-
-

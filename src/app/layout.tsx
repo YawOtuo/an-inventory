@@ -23,7 +23,7 @@ export default function RootLayout({
     <html lang="en">
       <Providers>
         <body
-          className={`${montserrat.className}  flex flex-col justify-center items-center`}>
+          className={` flex flex-col justify-center items-center`}>
           <Navbar />
 
           <div className="flex flex-col justify-center items-center max-w-[1728px] w-full">

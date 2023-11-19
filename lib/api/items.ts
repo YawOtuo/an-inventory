@@ -6,6 +6,14 @@ export const fetchItems = async () => {
 };
 
 
+export const fetchOneItem = async (id) => {
+  const response = await fetch(`${url}items/${id}`);
+  return response.json();
+};
+
+
+
+
 
 export const AddItems = async (body) => {
   
@@ -20,8 +28,8 @@ export const AddItems = async (body) => {
 };
 
 
-export const SearchInventory = async (query) => {
-  const response = await fetch(`${url}inventories/search/s?query=${query}`);
+export const SearchItem = async (query) => {
+  const response = await fetch(`${url}items/search/search?keyword=${query}`);
   return response.json();
 };
 
