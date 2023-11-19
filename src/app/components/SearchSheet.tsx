@@ -18,6 +18,8 @@ import Link from "next/link";
 import Refill from "./modals/Refill";
 import SellModal from "./modals/sell";
 import Sell from "./modals/sell";
+import SearchItemSmModal from "./modals/SearchItemSm";
+import SearchOneDetails from "./SearchOneDetails";
 
 export default function SearchSheet() {
   const [results, setResults] = useState([]);
@@ -49,7 +51,7 @@ export default function SearchSheet() {
   };
   return (
     <div>
-      <Sheet >
+      <Sheet>
         <SheetTrigger>
           <div className="flex gap-2 items-center justify-center">
             <CiSearch color="#E4A951" />
@@ -69,12 +71,10 @@ export default function SearchSheet() {
               />
             </SheetTitle>
             <SheetDescription className="">
-              <div className="grid grid-cols-4 gap-5 text-black ">
+              <div className="hidden lg:grid grid-cols-4 gap-5 text-black ">
                 {searching && <p>Loading</p>}
                 <div
-                  className={`col-span-2 ${
-                    oneData ? "col-span-4 lg:col-span-2" : "col-span-4"
-                  } overflow-y-scroll max-h-[80vh] lg:no-scrollbar order-2 lg:order-1`}>
+                  className={`col-span-2  overflow-y-scroll max-h-[80vh] no-scrollbar `}>
                   Results
                   {results?.map((r, index) => (
                     <div
@@ -90,42 +90,17 @@ export default function SearchSheet() {
                   ))}
                 </div>
                 {oneData && (
-                  <div className="col-span-4 lg:col-span-2 flex flex-col items-start px-10 justify-between order-1 lg:order-2">
-                    <div className="flex flex-col ">
-                      <p className="text-3xl font-semibold capitalize">
-                        {oneData?.type}
-                      </p>
-                      <p>
-                        <span className="text-md">Quantity</span> :
-                        {oneData?.quantity}
-                      </p>
-                    </div>
-                    <div className="flex flex-col gap-1 my-10">
-                      <p>Lorem : Lorem ipusm</p>
-                      <p>Lorem : Lorem ipusm</p>
-                      <p>Lorem : Lorem ipusm</p>
-                      <p>Lorem : Lorem ipusm</p>
-                      <p>Lorem : Lorem ipusm</p>
-                      <p>Lorem : Lorem ipusm</p>
-                      <p>Lorem : Lorem ipusm</p>
-                      <p>Lorem : Lorem ipusm</p>
-                      <p>Lorem : Lorem ipusm</p>
-                    </div>
-
-                    <p>{oneData?.description}</p>
-                    <div className="flex  gap-5 justify-start items-center w-full flex-wrap">
-                      <Refill />
-                      <Sell />
-                      <Link href={`/items/${oneData?.id}`}>
-                        <IconButton
-                          variant={"inventories"}
-                          label={"Go to Item"}
-                          reverse
-                        />
-                      </Link>
-                    </div>
-                  </div>
+                  <SearchOneDetails item={oneData}/>
                 )}
+              </div>
+              <div className="lg:hidden w-full">
+                {results?.map((r, index) => (
+                  <div
+                  className="w-full"
+                    key={index}>
+                    <SearchItemSmModal item={r}/>
+                  </div>
+                ))}
               </div>
             </SheetDescription>
           </SheetHeader>

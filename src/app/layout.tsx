@@ -24,8 +24,8 @@ export default function RootLayout({
       <Providers>
         <body
           className={` flex flex-col justify-center items-center`}>
-          <Navbar />
-
+            <Navbar />
+  
           <div className="flex flex-col justify-center items-center max-w-[1728px] w-full">
             {children}
           </div>

@@ -16,6 +16,7 @@ import IconButton from "./components/Buttons/IconButton";
 import AddItem from "./components/modals/AddItem";
 import Refill from "./components/modals/Refill";
 import Sell from "./components/modals/sell";
+import Link from "next/link";
 
 const Page = () => {
   const {
@@ -48,14 +49,18 @@ const Page = () => {
           </div>
           <div className="flex gap-5 flex-col lg:flex-row items-start lg:items-center">
             <AddItem />
-            <Refill /> 
-            <Sell/>
-            <IconButton
-              reverse
-              variant={"inventories"}
-              label={"View All Inventories"}
-            />
-            <IconButton reverse variant={"users"} label={"View All Users"} />
+            <Refill />
+            <Sell />
+            <Link href={"/inventory"}>
+              <IconButton
+                reverse
+                variant={"inventories"}
+                label={"View All Inventories"}
+              />
+            </Link>
+            <Link href={"/users"}>
+              <IconButton reverse variant={"users"} label={"View All Users"} />
+            </Link>{" "}
           </div>
         </div>
         <div className="flex justify-start items-center gap-10 mt-10 flex-wrap">

@@ -46,7 +46,7 @@ const Sell = () => {
       </Dialog.Trigger>
       <Dialog.Portal>
         <Dialog.Overlay className="bg-blackA6 data-[state=open]:animate-overlayShow fixed inset-0 bg-[#00000028]" />
-        <Dialog.Content className="data-[state=open]:animate-contentShow fixed top-[50%] left-[50%] max-h-[85vh] w-fit max-w-[50vw]  translate-x-[-50%] translate-y-[-50%] rounded-[6px] bg-white p-[25px] shadow-[hsl(206_22%_7%_/_35%)_0px_10px_38px_-10px,_hsl(206_22%_7%_/_20%)_0px_10px_20px_-15px] focus:outline-none z-[2100]">
+        <Dialog.Content className="data-[state=open]:animate-contentShow fixed top-[50%] left-[50%] max-h-[85vh] min-w-[300px] w-fit max-w-[50vw]  translate-x-[-50%] translate-y-[-50%] rounded-[6px] bg-white p-[25px] shadow-[hsl(206_22%_7%_/_35%)_0px_10px_38px_-10px,_hsl(206_22%_7%_/_20%)_0px_10px_20px_-15px] focus:outline-none z-[6100]">
           <Dialog.Title className="text-mauve12 m-0 text-[17px] font-medium">
             Sell
           </Dialog.Title>
@@ -62,9 +62,9 @@ const Sell = () => {
                 addItem(values);
               }}>
               <Form className="flex flex-col items-start gap-5 w-full">
-                <div className="flex gap-5 flex-col">
+                <div className="flex gap-5 flex-col w-full">
                   <FormDiv>
-                    <label htmlFor="date">Sell</label>
+                    <label htmlFor="date">Date</label>
                     <Field
                       type="text"
                       name="type"

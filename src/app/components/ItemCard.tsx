@@ -17,7 +17,7 @@ export default function ItemCard({ name, category, count }: Props) {
         <div className="flex gap-7 justify-center items-center">
           <div className="flex gap-5 items-center">
             <div className="relative aspect-square w-[40px] ">
-              <Image src={"/testimage1.png"} fill alt="Image" />
+              <Image src={"/testimage1.png"} fill alt="Image" objectFit="cover" />
             </div>
             {name}
           </div>

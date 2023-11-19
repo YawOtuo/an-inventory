@@ -62,7 +62,7 @@ const AddItem = () => {
                 addItem(values);
               }}>
               <Form className="grid grid-cols-2 items-start gap-5 w-full">
-                <div className="flex gap-5 flex-col">
+                <div className="col-span-2 lg:col-span-1 flex gap-5 flex-col">
                   <FormDiv>
                     <label htmlFor="date">Type</label>
                     <Field
@@ -92,7 +92,7 @@ const AddItem = () => {
                     />
                   </FormDiv>
                 </div>
-                <div className="flex gap-5 flex-col">
+                <div className="col-span-2 lg:col-span-1 flex gap-5 flex-col">
                   <FormDiv>
                     <label htmlFor="date">Quantity</label>
                     <Field
