@@ -18,8 +18,6 @@ import Link from "next/link";
 import Refill from "./modals/Refill";
 import SellModal from "./modals/sell";
 import Sell from "./modals/sell";
-import SearchItemSmModal from "./modals/SearchItemSm";
-import SearchOneDetails from "./SearchOneDetails";
 import { IoIosArrowBack } from "react-icons/io";
 
 export default function SearchSheet() {
