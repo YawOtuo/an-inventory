@@ -29,7 +29,7 @@ const NavItem = ({ name, icon, link }: NavProps) => {
 };
 
 const Navbar = () => {
-  const [hidden, setHidden] = useState(false);
+  const [hidden, setHidden] = useState(window.screenX < 1024 && true);
   return (
     <Root className=" relative flex  bg-[#e4a95116] w-full h-full flex-col lg:flex-row items-start justify-center lg:items-center">
       <div
