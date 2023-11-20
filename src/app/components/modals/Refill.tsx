@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import * as Dialog from "@radix-ui/react-dialog";
 import { Cross2Icon } from "@radix-ui/react-icons";
 import { ErrorMessage, Field, Form, Formik } from "formik";
@@ -8,20 +8,21 @@ import { AddInventory } from "../../../../lib/api/inventory";
 import { styled, keyframes } from "@stitches/react";
 import { AddItems } from "../../../../lib/api/items";
 import IconButton from "../Buttons/IconButton";
+import { ComboSelectItem } from "../ComboSelectItem";
 
 type Props = {
-
-  id: number
+  id?: number;
+  open: any;
+  setOpen: any;
 };
 
-const Refill = (
-  { id=46 } : Props
-) => {
+const Refill = ({ id, open, setOpen }: Props) => {
   const queryClient = useQueryClient();
+  const [itemId, setItemId] = useState();
 
   const mutation = useMutation((newItem) => AddInventory(newItem), {
     onSuccess: () => {
-      queryClient.invalidateQueries(`inventory-${id}`)
+      queryClient.invalidateQueries(`inventory-${id}`);
     },
   });
 
@@ -29,7 +30,7 @@ const Refill = (
     mutation.mutate(newItem);
   };
   return (
-    <Dialog.Root>
+    <Dialog.Root open={open} onOpenChange={setOpen}>
       <Dialog.Trigger asChild className="w-fit">
         <div className="w-fit">
           <IconButton label="refill" variant="refill" />
@@ -47,11 +48,11 @@ const Refill = (
                 action: "refill",
                 date: new Date().toLocaleDateString(),
                 quantity: 0,
-                itemId: id
-                
               }}
               onSubmit={(values) => {
+                values.itemId = id || itemId;
                 handleRefill(values);
+                setOpen(false);
               }}>
               <Form className="flex flex-col items-start gap-5 w-full">
                 <div className="flex gap-5 flex-col w-full">
@@ -69,26 +70,19 @@ const Refill = (
                       className="error"
                     />
                   </FormDiv>
+                  {!id && (
+                    <ComboSelectItem
+                      onChange={(value) => {
+                        setItemId(() => value);
+                      }}
+                    />
+                  )}
                   <FormDiv>
-                    <label htmlFor="item">Item</label>
+                    <label htmlFor="date">quantity</label>
                     <Field
                       type="text"
-                      name="item"
-                      placeholder="Select item"
-                      className="form-input"
-                    />
-                    <ErrorMessage
-                      name="type"
-                      component="div"
-                      className="error"
-                    />
-                  </FormDiv>
-                  <FormDiv>
-                    <label htmlFor="date">Amount</label>
-                    <Field
-                      type="text"
-                      name="amount"
-                      placeholder="Enter amount"
+                      name="quantity"
+                      placeholder="Enter quantity"
                       className="form-input"
                     />
                     <ErrorMessage
@@ -104,7 +98,7 @@ const Refill = (
                   className="w-full   max-h-[50px] bg-[#E4A951] p-2 font-semibold text-white"
                   // aria-label="Close"
                 >
-                  Add
+                  Refill
                 </button>
               </Form>
             </Formik>

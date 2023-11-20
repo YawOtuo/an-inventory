@@ -18,34 +18,34 @@ import {
   PopoverTrigger,
   
 } from "@/components/ui/popover"
+import { SearchItem, fetchItems } from "../../../lib/api/items"
+import { useQuery } from "@tanstack/react-query"
 
-const frameworks = [
-  {
-    value: "next.js",
-    label: "Next.js",
-  },
-  {
-    value: "sveltekit",
-    label: "SvelteKit",
-  },
-  {
-    value: "nuxt.js",
-    label: "Nuxt.js",
-  },
-  {
-    value: "remix",
-    label: "Remix",
-  },
-  {
-    value: "astro",
-    label: "Astro",
-  },
-]
+type Props = {
+  onChange : any
+}
 
-export function ComboSelectItem() {
+export function ComboSelectItem({onChange} : Props) {
   const [open, setOpen] = React.useState(false)
-  const [value, setValue] = React.useState("")
+  const [value, setValue] = React.useState()
+  const [keyword , setKeyWord] = React.useState()
 
+
+  React.useEffect(()=>{
+    onChange(value)
+  }, [value])
+
+
+  const {
+    isLoading,
+    error: itemError,
+    data: results,
+  } = useQuery(["items"], () => fetchItems(), {
+  });
+
+  // React.useEffect(()=>{
+  //   r
+  // }, [results])
   return (
     <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild>
@@ -53,35 +53,35 @@ export function ComboSelectItem() {
           variant="outline"
           role="combobox"
           aria-expanded={open}
-          className="w-[200px] justify-between"
+          className="w-full justify-between"
         >
           {value
-            ? frameworks.find((framework) => framework.value === value)?.label
-            : "Select framework..."}
+            ? results?.find((result) => result.id === value)?.name
+            : "Select item..."}
           <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
         </Button>
       </PopoverTrigger>
-      <PopoverContent className="w-[200px] p-0">
+      <PopoverContent className="w-full p-0 z-[7100] overflow-y-scroll">
         <Command>
-          <CommandInput placeholder="Search framework..." />
-          <CommandEmpty>No framework found.</CommandEmpty>
+          <CommandInput placeholder="Search item..." />
+          <CommandEmpty>No item found.</CommandEmpty>
           <CommandGroup>
-            {frameworks.map((framework) => (
+            {results?.map((result) => (
               <CommandItem
-                key={framework.value}
-                value={framework.value}
+                key={result.id}
+                value={result.id}
                 onSelect={(currentValue) => {
-                  setValue(currentValue === value ? "" : currentValue)
+                  setValue(currentValue === value ? "" : result.id)
                   setOpen(false)
                 }}
               >
                 <Check
                   className={cn(
                     "mr-2 h-4 w-4",
-                    value === framework.value ? "opacity-100" : "opacity-0"
+                    value === result.id ? "opacity-100" : "opacity-0"
                   )}
                 />
-                {framework.label}
+                {result.name}
               </CommandItem>
             ))}
           </CommandGroup>

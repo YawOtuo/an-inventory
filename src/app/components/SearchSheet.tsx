@@ -21,37 +21,28 @@ import Sell from "./modals/sell";
 import { IoIosArrowBack } from "react-icons/io";
 
 export default function SearchSheet() {
-  const [results, setResults] = useState([]);
+  // const [results, setResults] = useState([]);
   const [oneData, setOneData] = useState();
   const [searching, setSearching] = useState();
   const [hide, setHide] = useState(false);
 
+  const [open, setOpen] = useState()
+  const [open2, setOpen2] = useState()
+  const [sheetOpen , setSheetOpen] = useState()
+
   const queryClient = useQueryClient();
 
-  const searchItemsMutation = useMutation(
-    async (body) => {
-      return await SearchItem(body);
-    },
-    {
-      onSuccess: () => {
-        queryClient.invalidateQueries("search");
-      },
-    }
-  );
-
-  // Usage within your component
-  const searchItems = async (key) => {
-    try {
-      const response = await searchItemsMutation.mutateAsync(key);
-      setResults(response);
-      setSearching(false);
-    } catch (error) {
-      console.error(error);
-    }
-  };
+  const [keyword , setKeyWord] = useState()
+  const {
+    isLoading,
+    error: itemError,
+    data: results,
+  } = useQuery(["search", keyword], () => SearchItem(keyword), {
+    enabled: !!keyword,
+  });
   return (
     <div>
-      <Sheet>
+      <Sheet open={sheetOpen} onOpenChange={setSheetOpen}>
         <SheetTrigger>
           <div className="flex gap-2 items-center justify-center">
             <CiSearch color="#E4A951" />
@@ -66,13 +57,13 @@ export default function SearchSheet() {
                 placeholder="Search for item"
                 onChange={(e) => {
                   setSearching(true);
-                  searchItems(e.target.value);
+                  setKeyWord(e.target.value);
                 }}
               />
             </SheetTitle>
             <SheetDescription className="">
               <div className={`grid grid-cols-4 gap-5 text-black `}>
-                {searching && <p>Loading</p>}
+                {keyword && isLoading && <p>Loading</p>}
                 <div
                   className={`${
                     hide && "hidden lg:flex flex-col lg:col-span-2"
@@ -133,10 +124,12 @@ export default function SearchSheet() {
                     <p>{oneData?.description}</p>
                     <div className="flex flex-col gap-5 justify-start items-start w-full ">
                       <div className="flex gap-5 items-center justify-start">
-                        <Refill id={oneData?.id} />
-                        <Sell id={oneData?.id} />
+                        <Refill id={oneData?.id} open={open} setOpen={setOpen}/>
+                        <Sell id={oneData?.id} open={open2} setOpen={setOpen2} />
                       </div>
-                      <Link href={`/items/${oneData?.id}`} className="w-full">
+                      <Link href={`/items/${oneData?.id}`} className="w-full" 
+                      onClick={() => setSheetOpen(false)}
+                      >
                         <IconButton
                           variant={"inventories"}
                           label={"Go to Item"}

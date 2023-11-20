@@ -6,12 +6,17 @@ import IconButton from "@/app/components/Buttons/IconButton";
 import Link from "next/link";
 import AddItem from "@/app/components/modals/AddItem";
 import { useState } from "react";
+import Refill from "@/app/components/modals/Refill";
+import Sell from "@/app/components/modals/sell";
 
 type Props = {};
 
 export default function Page({ params }: Props) {
   const itemId = params.id;
   const [open, setOpen] = useState(false);
+  const [open2, setOpen2] = useState(false);
+  const [open3, setOpen3] = useState(false);
+
   const {
     isLoading: itemLoading,
     error: itemError,
@@ -21,7 +26,7 @@ export default function Page({ params }: Props) {
   });
   return (
     <div className="w-full px-5 lg:px-20 py-10">
-      {itemLoading && <p>Loading...</p>}
+      {itemLoading ? <p>Loading...</p> : 
       <div className="flex flex-col items-start justify-center w-full">
         <div className="flex flex-col gap-3 items-start justify-center uppercase w-full">
           <div className="flex gap-5 items-center justify-start">
@@ -37,8 +42,8 @@ export default function Page({ params }: Props) {
                   reverse
                 />
               </Link>
-              <IconButton label="Refill" variant="refill" />
-              <IconButton label="Sell" variant="sell" />
+              <Refill id={item?.id} open={open3} setOpen={setOpen3} />
+              <Sell id={item?.id} open={open2} setOpen={setOpen2} />
               <AddItem edit={true} item={item} open={open} setOpen={setOpen} />
             </div>
           )}
@@ -54,6 +59,7 @@ export default function Page({ params }: Props) {
           <p>Lorem</p>
         </div>
       </div>
+}
     </div>
   );
 }

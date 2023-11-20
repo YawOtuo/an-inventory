@@ -10,7 +10,7 @@ import { AddItems, UpdateItem } from "../../../../lib/api/items";
 import IconButton from "../Buttons/IconButton";
 
 type Props = {
-  open: boolean;
+  open: any;
   setOpen: any;
   edit?: boolean;
   item?: any;

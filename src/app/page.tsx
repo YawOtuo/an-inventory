@@ -26,7 +26,9 @@ const Page = () => {
   } = useQuery(["inventory"], () => fetchItems());
   const [lowStockItems, setLowStockItems] = useState(false);
   const [justFilledItems, setJustFilledItems] = useState(false);
-
+  const [open1, setOpen1] = useState(false);
+  const [open2, setOpen2] = useState(false);
+  const [open3, setOpen3] = useState(false);
   return (
     <div className="w-full flex flex-col justify-center items-center px-5 lg:px-10 py-5">
       <div className="w-full ">
@@ -48,9 +50,9 @@ const Page = () => {
             <p>What would you like to do today?</p>
           </div>
           <div className="flex gap-5 flex-col lg:flex-row items-start lg:items-center">
-            <AddItem />
-            <Refill />
-            <Sell />
+            <AddItem open={open1} setOpen={setOpen1} />
+            <Refill  open={open2} setOpen={setOpen2}/>
+            <Sell open={open3} setOpen={setOpen3}/>
             <Link href={"/inventory"}>
               <IconButton
                 reverse

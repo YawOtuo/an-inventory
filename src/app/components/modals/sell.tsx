@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import * as Dialog from "@radix-ui/react-dialog";
 import { Cross2Icon } from "@radix-ui/react-icons";
 import { ErrorMessage, Field, Form, Formik } from "formik";
@@ -8,13 +8,18 @@ import { AddInventory } from "../../../../lib/api/inventory";
 import { styled, keyframes } from "@stitches/react";
 import { AddItems } from "../../../../lib/api/items";
 import IconButton from "../Buttons/IconButton";
+import { ComboSelectItem } from "../ComboSelectItem";
 
 type Props = {
-  id: number;
+  id?: number;
+  open: any;
+  setOpen: any;
 };
 
-const Sell = ({ id=46 }: Props) => {
+const Sell = ({ id, open, setOpen }: Props) => {
   const queryClient = useQueryClient();
+  const [itemId, setItemId] = useState();
+
 
   const mutation = useMutation((newItem) => AddInventory(newItem), {
     onSuccess: () => {
@@ -27,7 +32,7 @@ const Sell = ({ id=46 }: Props) => {
   };
 
   return (
-    <Dialog.Root>
+    <Dialog.Root open={open} onOpenChange={setOpen}>
       <Dialog.Trigger asChild className="w-fit">
         <div className="w-fit">
           <IconButton label="Sell" variant="sell" />
@@ -40,15 +45,16 @@ const Sell = ({ id=46 }: Props) => {
             Sell
           </Dialog.Title>
           <div className="flex flex-col gap-3 items-start lg:items-end">
-            <Formik
+          <Formik
               initialValues={{
                 action: "sell",
                 date: new Date().toLocaleDateString(),
                 quantity: 0,
-                itemId: id,
               }}
               onSubmit={(values) => {
+                values.itemId = id || itemId;
                 handleSell(values);
+                setOpen(false);
               }}>
               <Form className="flex flex-col items-start gap-5 w-full">
                 <div className="flex gap-5 flex-col w-full">
@@ -66,26 +72,19 @@ const Sell = ({ id=46 }: Props) => {
                       className="error"
                     />
                   </FormDiv>
+                  {!id && (
+                    <ComboSelectItem
+                      onChange={(value) => {
+                        setItemId(() => value);
+                      }}
+                    />
+                  )}
                   <FormDiv>
-                    <label htmlFor="item">Item</label>
+                    <label htmlFor="date">Quantity</label>
                     <Field
                       type="text"
-                      name="item"
-                      placeholder="Select item"
-                      className="form-input"
-                    />
-                    <ErrorMessage
-                      name="type"
-                      component="div"
-                      className="error"
-                    />
-                  </FormDiv>
-                  <FormDiv>
-                    <label htmlFor="date">Amount</label>
-                    <Field
-                      type="text"
-                      name="amount"
-                      placeholder="Enter amount"
+                      name="quantity"
+                      placeholder="Enter quantity"
                       className="form-input"
                     />
                     <ErrorMessage
