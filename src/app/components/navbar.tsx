@@ -7,7 +7,7 @@ import { IoIosArrowUp, IoIosNotifications } from "react-icons/io";
 import { MdOutlineInventory } from "react-icons/md";
 import { HiMiniUsers } from "react-icons/hi2";
 import { MdProductionQuantityLimits } from "react-icons/md";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { IoIosArrowDown } from "react-icons/io";
 import UserProfileSheet from "./UserProfileSheet";
 
@@ -29,7 +29,13 @@ const NavItem = ({ name, icon, link }: NavProps) => {
 };
 
 const Navbar = () => {
-  const [hidden, setHidden] = useState(window.screenX < 1024 && true);
+  const [hidden, setHidden] = useState(false);
+
+  useEffect(() => {
+    if (typeof window !== 'undefined' && window.innerWidth < 1024) {
+      setHidden(true);
+    }
+  }, []); 
   return (
     <Root className=" relative flex  bg-[#e4a95116] w-full h-full flex-col lg:flex-row items-start justify-center lg:items-center">
       <div
