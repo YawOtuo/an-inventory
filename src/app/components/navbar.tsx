@@ -39,8 +39,8 @@ const Navbar = () => {
   return (
     <Root className=" relative flex  bg-[#e4a95116] w-full h-full flex-col lg:flex-row items-start justify-center lg:items-center">
       <div
-        className={` flex flex-col items-start lg:items-center lg:flex-row gap-2 p-4 max-w-[1728px] justify-start w-full h-full
-        ${hidden && "max-h-[50px] overflow-hidden"}
+        className={` flex flex-col items-start lg:items-center lg:flex-row gap-2 p-4 max-w-[1728px] justify-start w-full h-full transition-[height] duration-2000
+        ${hidden && " h-[50px] max-h-[50px] overflow-hidden"}
         `}>
         <div className="absolute right-[10px] lg:hidden">
           {hidden && (

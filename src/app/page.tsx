@@ -49,7 +49,7 @@ const Page = () => {
             <p className="text-[40px] font-bold">Welcome Mrs. Anokye,</p>
             <p>What would you like to do today?</p>
           </div>
-          <div className="flex gap-5 flex-col lg:flex-row items-start lg:items-center">
+          <div className="flex gap-5 flex-wrap flex-row items-start lg:items-center">
             <AddItem open={open1} setOpen={setOpen1} />
             <Refill  open={open2} setOpen={setOpen2}/>
             <Sell open={open3} setOpen={setOpen3}/>
@@ -65,7 +65,7 @@ const Page = () => {
             </Link>{" "}
           </div>
         </div>
-        <div className="flex justify-start items-center gap-10 mt-10 flex-wrap">
+        <div className="flex justify-start items-center gap-10 my-10 flex-wrap">
           <TotalSales filter="today" amount={30} />
           <TotalSales filter="This week" amount={300} />
           <TotalSales filter="this month" amount={500} />
