@@ -44,6 +44,11 @@ const Page = () => {
             <JustFilled />
           </div>
         )}
+        <div className="hidden lg:flex justify-center items-center gap-10 mb-6 flex-wrap">
+          <TotalSales filter="today" amount={30} />
+          <TotalSales filter="This week" amount={300} />
+          <TotalSales filter="this month" amount={500} />
+        </div>
         <div className="flex flex-col gap-6">
           <div className="flex flex-col gap-1">
             <p className="text-[40px] font-bold">Welcome Mrs. Anokye,</p>
@@ -51,8 +56,8 @@ const Page = () => {
           </div>
           <div className="flex gap-5 flex-wrap flex-row items-start lg:items-center">
             <AddItem open={open1} setOpen={setOpen1} />
-            <Refill  open={open2} setOpen={setOpen2}/>
-            <Sell open={open3} setOpen={setOpen3}/>
+            <Refill open={open2} setOpen={setOpen2} />
+            <Sell open={open3} setOpen={setOpen3} />
             <Link href={"/inventory"}>
               <IconButton
                 reverse
@@ -64,11 +69,11 @@ const Page = () => {
               <IconButton reverse variant={"users"} label={"View All Users"} />
             </Link>{" "}
           </div>
-        </div>
-        <div className="flex justify-start items-center gap-10 my-10 flex-wrap">
-          <TotalSales filter="today" amount={30} />
-          <TotalSales filter="This week" amount={300} />
-          <TotalSales filter="this month" amount={500} />
+          <div className="lg:hidden flex justify-start items-center gap-10 my-10 flex-wrap">
+            <TotalSales filter="today" amount={30} />
+            <TotalSales filter="This week" amount={300} />
+            <TotalSales filter="this month" amount={500} />
+          </div>
         </div>
         <div className="w-full">
           <RecentlySold />
